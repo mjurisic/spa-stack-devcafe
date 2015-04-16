@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/ts/ShorthandProperties.js" />
+        <item url="file://$PROJECT_DIR$/ts/Modules.js" />
+        <item url="file://$PROJECT_DIR$/ts/Functions.js" />
+        <item url="file://$PROJECT_DIR$/ts/DuckTyping.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/ts/ShorthandProperties.js" />
+      <root url="file://$PROJECT_DIR$/ts/Modules.js" />
+      <root url="file://$PROJECT_DIR$/ts/Functions.js" />
+      <root url="file://$PROJECT_DIR$/ts/DuckTyping.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
