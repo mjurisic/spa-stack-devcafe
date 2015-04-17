@@ -1,0 +1,1 @@
+/// <reference path="../reference.ts" />

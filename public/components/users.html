@@ -1,0 +1,10 @@
+<div>
+    <h2>Users view</h2>
+
+    <div ng-repeat="user in users">
+        {{user.id}}
+        {{user.firstname}}
+        {{user.lastname}}
+        <a href="#/users/{{user.id}}">details</a>
+    </div>
+</div>
