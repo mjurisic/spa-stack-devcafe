@@ -11,13 +11,21 @@ module example {
                     templateUrl: 'components/user.html',
                     controller: 'example.components.UserController'
                 })
+                .when('/rides', {
+                    templateUrl: 'components/rides.html',
+                    controller: 'example.components.RideController'
+                })
+                .when('/ride', {
+                    templateUrl: 'components/user.html',
+                    controller: 'example.components.UserController'
+                })
                 .otherwise({
-                    redirectTo: '/users'
+                    redirectTo: '/rides'
                 })
         }
 
 
         static $inject = ['$routeProvider'];
     }
-    var exampleapp = angular.module('example', ['ngRoute']).config(ModuleConfig);
+    var exampleapp = angular.module('example', ['ngRoute', 'ui.grid']).config(ModuleConfig);
 }

@@ -18,9 +18,16 @@ module.exports = function (grunt) {
             vendor: {
                 src: [
                     'bower_components/angular/angular.js',
-                    'bower_components/angular-route/angular-route.js'
+                    'bower_components/angular-route/angular-route.js',
+                    'bower_components/angular-ui-grid/ui-grid.js'
                 ],
                 dest: 'dist/vendor.js'
+            },
+            css: {
+                src: [
+                    'bower_components/angular-ui-grid/ui-grid.css'
+                ],
+                dest: 'dist/vendor.css'
             },
             dist: {
                 src: ['build/ts/**/*.js'],
@@ -31,6 +38,7 @@ module.exports = function (grunt) {
             main: {
                 files: [
                     {expand: true, flatten: true, src: ['dist/*.js'], dest: 'public/'},
+                    {expand: true, flatten: true, src: ['dist/*.css'], dest: 'public/'},
                     {expand: true, cwd: 'ts/app/components/', src: ['**/*.html'], dest: 'public/components'},
                 ]
 

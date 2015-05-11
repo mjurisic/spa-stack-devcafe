@@ -9,14 +9,20 @@ var example;
             }).when('/users/:userId', {
                 templateUrl: 'components/user.html',
                 controller: 'example.components.UserController'
+            }).when('/rides', {
+                templateUrl: 'components/rides.html',
+                controller: 'example.components.RideController'
+            }).when('/ride', {
+                templateUrl: 'components/user.html',
+                controller: 'example.components.UserController'
             }).otherwise({
-                redirectTo: '/users'
+                redirectTo: '/rides'
             });
         }
         ModuleConfig.$inject = ['$routeProvider'];
         return ModuleConfig;
     })();
-    var exampleapp = angular.module('example', ['ngRoute']).config(ModuleConfig);
+    var exampleapp = angular.module('example', ['ngRoute', 'ui.grid']).config(ModuleConfig);
 })(example || (example = {}));
 ;/// <reference path="../reference.ts"/>
 var example;
@@ -47,6 +53,39 @@ var example;
         })();
         components.UserController = UserController;
         angular.module('example').controller('example.UserController', UserController);
+    })(components = example.components || (example.components = {}));
+})(example || (example = {}));
+;/// <reference path="../reference.ts"/>
+var example;
+(function (example) {
+    var components;
+    (function (components) {
+        var RideController = (function () {
+            function RideController($scope, $http) {
+                $scope.getRides = function () {
+                    $scope.rides = $http.get('/api/rides').success(function (rides) {
+                        $scope.rides = rides;
+                    });
+                };
+                $scope.saveRide = function () {
+                    if ($scope.ride) {
+                        $http.put('/api/ride', { 'ride': $scope.ride }).success(function () {
+                            $scope.ride = null;
+                            $scope.getRides();
+                        }).error(function () {
+                            //TODO do nice message
+                            alert('error');
+                        });
+                        console.log($scope.ride);
+                    }
+                };
+                $scope.getRides();
+            }
+            RideController.$inject = ['$scope', '$http'];
+            return RideController;
+        })();
+        components.RideController = RideController;
+        angular.module('example').controller('example.components.RideController', RideController);
     })(components = example.components || (example.components = {}));
 })(example || (example = {}));
 ;/// <reference path="../reference.ts"/>

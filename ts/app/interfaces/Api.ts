@@ -5,4 +5,13 @@ module example.interfaces {
         firstname:string;
         lastname:string;
     }
+
+    export interface Ride {
+        km: number;
+        date:Date;
+        // TODO
+        user:string;
+        comment: string;
+        tags: Array<String>
+    }
 }
