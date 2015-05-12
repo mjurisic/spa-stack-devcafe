@@ -1,4 +1,4 @@
-/// <reference path="reference.ts"/>
+/// <reference path="../reference.ts"/>
 module example {
     class ModuleConfig {
         constructor($routeProvider) {
@@ -23,8 +23,6 @@ module example {
                     redirectTo: '/rides'
                 })
         }
-
-
         static $inject = ['$routeProvider'];
     }
     var exampleapp = angular.module('example', ['ngRoute', 'ui.grid']).config(ModuleConfig);

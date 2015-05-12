@@ -1,4 +1,4 @@
-/// <reference path="../reference.ts" />
+/// <reference path="../../reference.ts" />
 module example.interfaces {
     export interface User {
         id:number;

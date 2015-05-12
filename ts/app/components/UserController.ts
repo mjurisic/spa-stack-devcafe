@@ -1,6 +1,6 @@
-/// <reference path="../reference.ts"/>
+/// <reference path="../../reference.ts"/>
 module example.components {
-    export interface MyScope extends angular.IScope {
+    export interface MyScope extends ng.IScope {
         getUsers():void;
         getSingleUser(id:number):void;
         users:Array<example.interfaces.User>;

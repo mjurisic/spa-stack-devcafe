@@ -4,7 +4,17 @@ module.exports = function (grunt) {
         typescript: {
             base: {
                 src: ['ts/app/**/*.ts'],
-                dest: 'build/'
+                dest: 'build/',
+                options:{
+                    removeComments:true
+                }
+            },
+            test: {
+                src: ['ts/test/karma/**/*.karma.ts'],
+                dest: 'build/karma_tests/',
+                options:{
+                    removeComments:true
+                }
             }
         },
         build: {
@@ -22,6 +32,10 @@ module.exports = function (grunt) {
                     'bower_components/angular-ui-grid/ui-grid.js'
                 ],
                 dest: 'dist/vendor.js'
+            },
+            vendor_test: {
+                src: ['bower_components/angular-mocks/angular-mocks.js'],
+                dest: 'build/vendor_test.js'
             },
             css: {
                 src: [
@@ -54,10 +68,16 @@ module.exports = function (grunt) {
                 }
             }
         },
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js',
+                singleRun: true
+            }
+        },
         watch: {
             express: {
                 files: ['ts/**/*'],
-                tasks: ['typescript', 'concat', 'copy', 'server'],
+                tasks: ['typescript.base', 'concat', 'copy', 'server'],
                 options: {
                     spawn: false // for grunt-contrib-watch v0.5.0+, "nospawn: true" for lower versions. Without this option specified express won't be reloaded
                 }
@@ -67,15 +87,18 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', ['typescript', 'concat', 'copy', 'server']);
+    grunt.registerTask('build', ['typescript', 'concat', 'copy']);
+    grunt.registerTask('test', ['build', 'karma']);
     grunt.registerTask('server', ['express:dev', 'watch']);
-    grunt.registerTask('hello', function() {
+    grunt.registerTask('hello', function () {
         console.log('hello');
-    })
+    });
 
     grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-karma');
 
 };

@@ -1,4 +1,3 @@
-/// <reference path="reference.ts"/>
 var example;
 (function (example) {
     var ModuleConfig = (function () {
@@ -24,39 +23,7 @@ var example;
     })();
     var exampleapp = angular.module('example', ['ngRoute', 'ui.grid']).config(ModuleConfig);
 })(example || (example = {}));
-;/// <reference path="../reference.ts"/>
-var example;
-(function (example) {
-    var components;
-    (function (components) {
-        var UserController = (function () {
-            function UserController($scope) {
-                $scope.getUsers = function () {
-                    // in real world we would get probably load this from db and get it from server via rest request
-                    var users = [
-                        {
-                            id: 1,
-                            firstname: 'john',
-                            lastname: 'doe'
-                        },
-                        {
-                            id: 2,
-                            firstname: 'jane',
-                            lastname: 'dove'
-                        }
-                    ];
-                    $scope.users = users;
-                };
-            }
-            UserController.$inject = ['$scope'];
-            return UserController;
-        })();
-        components.UserController = UserController;
-        angular.module('example').controller('example.UserController', UserController);
-    })(components = example.components || (example.components = {}));
-})(example || (example = {}));
-;/// <reference path="../reference.ts"/>
-var example;
+;var example;
 (function (example) {
     var components;
     (function (components) {
@@ -64,7 +31,14 @@ var example;
             function RideController($scope, $http) {
                 $scope.getRides = function () {
                     $scope.rides = $http.get('/api/rides').success(function (rides) {
-                        $scope.rides = rides;
+                        if (rides) {
+                            $scope.rides = rides;
+                            $scope.total = rides.reduce(function (prev, curr) {
+                                return prev + curr.km;
+                            }, 0.0);
+                        }
+                    }).error(function () {
+                        alert('there was a backend error loading list of rides');
                     });
                 };
                 $scope.saveRide = function () {
@@ -73,10 +47,8 @@ var example;
                             $scope.ride = null;
                             $scope.getRides();
                         }).error(function () {
-                            //TODO do nice message
                             alert('error');
                         });
-                        console.log($scope.ride);
                     }
                 };
                 $scope.getRides();
@@ -88,15 +60,13 @@ var example;
         angular.module('example').controller('example.components.RideController', RideController);
     })(components = example.components || (example.components = {}));
 })(example || (example = {}));
-;/// <reference path="../reference.ts"/>
-var example;
+;var example;
 (function (example) {
     var components;
     (function (components) {
         var UserController = (function () {
             function UserController($scope, $routeParams) {
                 $scope.getUsers = function () {
-                    // in real world we would get probably load this from db and get it from server via rest request
                     $scope.users = [
                         {
                             id: 1,
@@ -135,25 +105,4 @@ var example;
         angular.module('example').controller('example.components.UserController', UserController);
     })(components = example.components || (example.components = {}));
 })(example || (example = {}));
-;/// <reference path="../reference.ts"/>
-var example;
-(function (example) {
-    var controllers;
-    (function (controllers) {
-        var ExampleController = (function () {
-            function ExampleController($scope) {
-                console.log('i am alive!!');
-                $scope.foo = 'bar';
-            }
-            ExampleController.$inject = ['$scope'];
-            return ExampleController;
-        })();
-        controllers.ExampleController = ExampleController;
-        angular.module('example').controller('example.ExampleController', ExampleController);
-    })(controllers = example.controllers || (example.controllers = {}));
-})(example || (example = {}));
-;/// <reference path="../reference.ts" />
-;/// <reference path="typings/angular/angular.d.ts"/>
-/// <reference path="app.ts" />
-/// <reference path="interfaces/Api.ts" />
-/// <reference path="components/UserController.ts" />
+;;
